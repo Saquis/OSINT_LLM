@@ -2,7 +2,6 @@ import argparse
 import sys
 from rich.console import Console
 from rich.panel import Panel
-from rich.text import Text
 from src.scraper.pipeline import OSINTPipeline
 
 console = Console()
@@ -36,28 +35,10 @@ Ejemplos:
   python main.py --target empresa.com --no-llm
         """
     )
-    parser.add_argument(
-        "--target", "-t",
-        required=True,
-        help="Dominio objetivo (ej: empresa.com)"
-    )
-    parser.add_argument(
-        "--engine", "-e",
-        choices=["duckduckgo", "bing"],
-        default="duckduckgo",
-        help="Motor de busqueda (default: duckduckgo)"
-    )
-    parser.add_argument(
-        "--no-llm",
-        action="store_true",
-        help="Desactivar analisis LLM (solo scraping)"
-    )
-    parser.add_argument(
-        "--limit", "-l",
-        type=int,
-        default=10,
-        help="Limite de URLs a scrapear (default: 10)"
-    )
+    parser.add_argument("--target", "-t", required=True, help="Dominio objetivo (ej: empresa.com)")
+    parser.add_argument("--engine", "-e", choices=["duckduckgo", "bing"], default="duckduckgo", help="Motor de busqueda")
+    parser.add_argument("--no-llm", action="store_true", help="Desactivar analisis LLM")
+    parser.add_argument("--limit", "-l", type=int, default=10, help="Limite de URLs a scrapear")
     return parser.parse_args()
 
 def main():
